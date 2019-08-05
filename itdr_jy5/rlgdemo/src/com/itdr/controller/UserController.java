@@ -14,9 +14,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/manage/user/list.do")
+@WebServlet("/manage/user/*")
 public class UserController extends HttpServlet {
-    UserService uc = new UserService();
+   private UserService uc = new UserService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -30,14 +30,18 @@ public class UserController extends HttpServlet {
 //如何获取请求路径信息
         String pathInfo = request.getPathInfo();
         String path = PathUtil.getPath(pathInfo);
-        ResponseCode rs = null;
 
+//判断请求
+        ResponseCode rs = null ;
         switch (path) {
             case "list":
                 rs = listDo(request);
                 break;
             case "login":
                 rs = login(request);
+                break;
+            case"disableuser":
+                rs = disableuser(request);
                 break;
         }
 
@@ -100,5 +104,15 @@ public class UserController extends HttpServlet {
         //return uc.selectOne(username, password);
     }
 
+    //禁用用户
+    private ResponseCode disableuser(HttpServletRequest request) {
+        //获取参数
+        String uid = request.getParameter("uid");
 
+        //调用方法
+        ResponseCode rs = uc.selectOne(uid);
+
+        return rs;
+        //return uc.selectOne(username, password);
+    }
 }

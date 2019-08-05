@@ -27,7 +27,16 @@ while (res.next()){
    System.out.println(res.getString(2));
   }
 }
+   @Test
+   public void test2(){
+      String path="/login.do";
+         String s1=path.replace(".","/");
+         String[] strings=s1.split("/");
+      System.out.println(strings[1]);
 
+
+
+   }
 
 
 

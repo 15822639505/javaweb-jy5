@@ -29,7 +29,15 @@ public class ResponseCode<T> {
         this.mag = mag;
     }
 
-    //成功的时候只要返回状态码和成功获取的数据
+    @Override
+    public String toString() {
+        return "ResponseCode{" +
+                "status=" + status +
+                ", data=" + data +
+                ", mag='" + mag + '\'' +
+                '}';
+    }
+//成功的时候只要返回状态码和成功获取的数据
     //失败的时候只要返回状态码和失败信息
 
 }
